@@ -1,0 +1,85 @@
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .models import (
+    Category, Subcategory, Unit, StorageType, StoreLocationType, Supplier,
+    StoreLocation, Product, Inventory, ProductStoreLocation, Roles, Employee,
+    SalesTransaction, Order
+)
+from .serializers import (
+    CategorySerializer, SubcategorySerializer, UnitSerializer, StorageTypeSerializer,
+    StoreLocationTypeSerializer, SupplierSerializer, StoreLocationSerializer,
+    ProductSerializer, InventorySerializer, ProductStoreLocationSerializer,
+    RolesSerializer, EmployeeSerializer, SalesTransactionSerializer, OrderSerializer
+)
+
+class BaseViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the objects
+        for the currently authenticated user.
+        """
+        return self.queryset.filter(account_id=self.request.user.id)
+
+    def perform_create(self, serializer):
+        """
+        Automatically add the account_id to the object.
+        """
+        serializer.save(account_id=self.request.user.id)
+
+class CategoryViewSet(BaseViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class SubcategoryViewSet(BaseViewSet):
+    queryset = Subcategory.objects.all()
+    serializer_class = SubcategorySerializer
+
+class UnitViewSet(BaseViewSet):
+    queryset = Unit.objects.all()
+    serializer_class = UnitSerializer
+
+class StorageTypeViewSet(BaseViewSet):
+    queryset = StorageType.objects.all()
+    serializer_class = StorageTypeSerializer
+
+class StoreLocationTypeViewSet(BaseViewSet):
+    queryset = StoreLocationType.objects.all()
+    serializer_class = StoreLocationTypeSerializer
+
+class SupplierViewSet(BaseViewSet):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
+
+class StoreLocationViewSet(BaseViewSet):
+    queryset = StoreLocation.objects.all()
+    serializer_class = StoreLocationSerializer
+
+class ProductViewSet(BaseViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class InventoryViewSet(BaseViewSet):
+    queryset = Inventory.objects.all()
+    serializer_class = InventorySerializer
+
+class ProductStoreLocationViewSet(BaseViewSet):
+    queryset = ProductStoreLocation.objects.all()
+    serializer_class = ProductStoreLocationSerializer
+
+class RolesViewSet(BaseViewSet):
+    queryset = Roles.objects.all()
+    serializer_class = RolesSerializer
+
+class EmployeeViewSet(BaseViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+class SalesTransactionViewSet(BaseViewSet):
+    queryset = SalesTransaction.objects.all()
+    serializer_class = SalesTransactionSerializer
+
+class OrderViewSet(BaseViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
