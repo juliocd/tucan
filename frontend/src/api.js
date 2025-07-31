@@ -39,8 +39,8 @@ export default {
   deleteCategory(id) {
     return apiClient.delete(`/categories/${id}/`);
   },
-  getSubcategories() {
-    return apiClient.get('/subcategories/');
+  getSubcategories(categoryId) {
+    return apiClient.get('/subcategories/', { params: { category_id: categoryId } });
   },
   createSubcategory(data) {
     return apiClient.post('/subcategories/', data);
@@ -75,6 +75,93 @@ export default {
   deleteUnit(id) {
     return apiClient.delete(`/units/${id}/`);
   },
+  getStoreTypes() {
+    return apiClient.get('/storetypes/');
+  },
+  createStoreType(data) {
+    return apiClient.post('/storetypes/', data);
+  },
+  updateStoreType(id, data) {
+    return apiClient.put(`/storetypes/${id}/`, data);
+  },
+  deleteStoreType(id) {
+    return apiClient.delete(`/storetypes/${id}/`);
+  },
+  getSuppliers() {
+    return apiClient.get('/suppliers/');
+  },
+  createSupplier(data) {
+    return apiClient.post('/suppliers/', data);
+  },
+  updateSupplier(id, data) {
+    return apiClient.put(`/suppliers/${id}/`, data);
+  },
+  deleteSupplier(id) {
+    return apiClient.delete(`/suppliers/${id}/`);
+  },
+  getRoles() {
+    return apiClient.get('/roles/');
+  },
+  createRole(data) {
+    return apiClient.post('/roles/', data);
+  },
+  updateRole(id, data) {
+    return apiClient.put(`/roles/${id}/`, data);
+  },
+  deleteRole(id) {
+    return apiClient.delete(`/roles/${id}/`);
+  },
+  getStorageTypes() {
+    return apiClient.get('/storagetypes/');
+  },
+  createStorageType(data) {
+    return apiClient.post('/storagetypes/', data);
+  },
+  updateStorageType(id, data) {
+    return apiClient.put(`/storagetypes/${id}/`, data);
+  },
+  deleteStorageType(id) {
+    return apiClient.delete(`/storagetypes/${id}/`);
+  },
+  deleteInventory(id) {
+    return apiClient.delete(`/inventory/${id}/`);
+  },
+  getEmployees() {
+    return apiClient.get('/employees/');
+  },
+  createEmployee(data) {
+    return apiClient.post('/employees/', data);
+  },
+  updateEmployee(id, data) {
+    return apiClient.put(`/employees/${id}/`, data);
+  },
+  deleteEmployee(id) {
+    return apiClient.delete(`/employees/${id}/`);
+  },
+  getSalesTransactions() {
+    return apiClient.get('/salestransactions/');
+  },
+  createSalesTransaction(data) {
+    return apiClient.post('/salestransactions/', data);
+  },
+  updateSalesTransaction(id, data) {
+    return apiClient.put(`/salestransactions/${id}/`, data);
+  },
+  deleteSalesTransaction(id) {
+    return apiClient.delete(`/salestransactions/${id}/`);
+  },
+  getOrders() {
+    return apiClient.get('/orders/');
+  },
+  createOrder(data) {
+    return apiClient.post('/orders/', data);
+  },
+  updateOrder(id, data) {
+    return apiClient.put(`/orders/${id}/`, data);
+  },
+  deleteOrder(id) {
+    return apiClient.delete(`/orders/${id}/`);
+  },
   getStorageTypes() {
     return apiClient.get('/storagetypes/');
   },
@@ -91,6 +178,12 @@ export default {
   // Add other API calls here
   getInventory() {
     return apiClient.get('/inventory/');
+  },
+  createInventory(data) {
+    return apiClient.post('/inventory/', data);
+  },
+  updateInventory(id, data) {
+    return apiClient.put(`/inventory/${id}/`, data);
   },
   getStoreLocations() {
     return apiClient.get('/storelocations/');

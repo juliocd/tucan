@@ -28,9 +28,17 @@ class Unit(BaseModel):
     def __str__(self):
         return self.name
 
+class StoreType(BaseModel):
+    name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
 
+class StorageType(BaseModel):
+    name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
 
 class Supplier(BaseModel):
     name = models.CharField(max_length=255)
@@ -74,9 +82,7 @@ class Inventory(BaseModel):
     class Meta:
         verbose_name_plural = "Inventory"
 
-class ProductStoreLocation(BaseModel):
-    product_id = models.CharField(max_length=255)
-    store_location_id = models.CharField(max_length=255)
+
 
 class Roles(BaseModel):
     name = models.CharField(max_length=255)

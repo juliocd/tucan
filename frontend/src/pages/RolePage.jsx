@@ -1,120 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Alert, Modal } from 'react-bootstrap';
 import api from '../api';
-import ProductForm from '../components/ProductForm';
-import ProductDetails from '../components/ProductDetails';
+import RoleForm from '../components/RoleForm';
+import RoleDetails from '../components/RoleDetails';
 
-const ProductPage = () => {
-  const [products, setProducts] = useState([]);
+const RolePage = () => {
+  const [roles, setRoles] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null);
   const [error, setError] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [productToDelete, setProductToDelete] = useState(null);
+  const [roleToDelete, setRoleToDelete] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   useEffect(() => {
-    fetchProducts();
+    fetchRoles();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchRoles = async () => {
     try {
-      const response = await api.getProducts();
-      setProducts(response.data);
+      const response = await api.getRoles();
+      setRoles(response.data);
     } catch (err) {
-      setError('Failed to fetch products.');
+      setError('Failed to fetch roles.');
     }
   };
 
-  const handleSave = async (productData) => {
+  const handleSave = async (roleData) => {
     try {
-      if (productData.id) {
-        await api.updateProduct(productData.id, productData);
+      if (roleData.id) {
+        await api.updateRole(roleData.id, roleData);
       } else {
-        await api.createProduct(productData);
+        await api.createRole(roleData);
       }
-      fetchProducts();
+      fetchRoles();
       setShowModal(false);
     } catch (err) {
-      setError('Failed to save product.');
+      setError('Failed to save role.');
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await api.deleteProduct(id);
-      fetchProducts();
+      await api.deleteRole(id);
+      fetchRoles();
       setShowConfirmModal(false);
     } catch (err) {
-      setError('Failed to delete product.');
+      setError('Failed to delete role.');
     }
   };
 
   const openConfirmModal = (id) => {
-    setProductToDelete(id);
+    setRoleToDelete(id);
     setShowConfirmModal(true);
   };
 
-  const openDetailsModal = (product) => {
-    setSelectedProduct(product);
+  const openDetailsModal = (role) => {
+    setSelectedRole(role);
     setShowDetailsModal(true);
   };
 
   const openCreateModal = () => {
-    setSelectedProduct(null);
+    setSelectedRole(null);
     setShowModal(true);
   }
 
   return (
     <Container className="mt-5">
-      <h2>Products</h2>
+      <h2>Roles</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Button variant="primary" onClick={openCreateModal}>
-        Create Product
+        Create Role
       </Button>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Price</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
+          {roles.map(role => (
+            <tr key={role.id}>
+              <td>{role.name}</td>
               <td>
-                <Button variant="secondary" onClick={() => openDetailsModal(product)}>View</Button>
-                <Button variant="info" onClick={() => { setSelectedProduct(product); setShowModal(true); }} className="ms-2">Edit</Button>
-                <Button variant="danger" onClick={() => openConfirmModal(product.id)} className="ms-2">Delete</Button>
+                <Button variant="secondary" onClick={() => openDetailsModal(role)}>View</Button>
+                <Button variant="info" onClick={() => { setSelectedRole(role); setShowModal(true); }} className="ms-2">Edit</Button>
+                <Button variant="danger" onClick={() => openConfirmModal(role.id)} className="ms-2">Delete</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-      <ProductForm
+      <RoleForm
         show={showModal}
         handleClose={() => setShowModal(false)}
-        product={selectedProduct}
+        role={selectedRole}
         onSave={handleSave}
       />
-      <ProductDetails
+      <RoleDetails
         show={showDetailsModal}
         handleClose={() => setShowDetailsModal(false)}
-        product={selectedProduct}
+        role={selectedRole}
       />
       <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Deletion</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
+        <Modal.Body>Are you sure you want to delete this role?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={() => handleDelete(productToDelete)}>
+          <Button variant="danger" onClick={() => handleDelete(roleToDelete)}>
             Delete
           </Button>
         </Modal.Footer>
@@ -123,4 +121,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default RolePage;

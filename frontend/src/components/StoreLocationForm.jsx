@@ -4,7 +4,7 @@ import api from '../api';
 
 const StoreLocationForm = ({ show, handleClose, storeLocation, onSave }) => {
   const [formData, setFormData] = useState({});
-  const [storeLocationTypes, setStoreLocationTypes] = useState([]);
+  const [storeTypes, setStoreTypes] = useState([]);
 
   useEffect(() => {
     if (show) {
@@ -17,16 +17,16 @@ const StoreLocationForm = ({ show, handleClose, storeLocation, onSave }) => {
   }, [storeLocation, show]);
 
   useEffect(() => {
-    const fetchStoreLocationTypes = async () => {
+    const fetchStoreTypes = async () => {
       try {
-        const response = await api.getStoreLocationTypes();
-        setStoreLocationTypes(response.data);
+        const response = await api.getStoreTypes();
+        setStoreTypes(response.data);
       } catch (error) {
-        console.error('Failed to fetch store location types', error);
+        console.error('Failed to fetch store types', error);
       }
     };
     if (show) {
-      fetchStoreLocationTypes();
+      fetchStoreTypes();
     }
   }, [show]);
 
@@ -59,9 +59,9 @@ const StoreLocationForm = ({ show, handleClose, storeLocation, onSave }) => {
               onChange={handleChange}
             >
               <option value="">Select a Store Type</option>
-              {storeLocationTypes.map(storeLocationType => (
-                <option key={storeLocationType.id} value={storeLocationType.id}>
-                  {storeLocationType.name}
+              {storeTypes.map(storeType => (
+                <option key={storeType.id} value={storeType.id}>
+                  {storeType.name}
                 </option>
               ))}
             </Form.Select>

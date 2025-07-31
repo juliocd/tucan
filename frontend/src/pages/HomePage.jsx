@@ -10,8 +10,13 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [units, setUnits] = useState([]);
+  const [storeTypes, setStoreTypes] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [storageTypes, setStorageTypes] = useState([]);
-  const [storeLocationTypes, setStoreLocationTypes] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [salesTransactions, setSalesTransactions] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,11 +39,26 @@ const HomePage = () => {
         const unitsRes = await api.getUnits();
         setUnits(unitsRes.data);
 
+        const storeTypesRes = await api.getStoreTypes();
+        setStoreTypes(storeTypesRes.data);
+
+        const suppliersRes = await api.getSuppliers();
+        setSuppliers(suppliersRes.data);
+
+        const rolesRes = await api.getRoles();
+        setRoles(rolesRes.data);
+
         const storageTypesRes = await api.getStorageTypes();
         setStorageTypes(storageTypesRes.data);
 
-        const storeLocationTypesRes = await api.getStoreLocationTypes();
-        setStoreLocationTypes(storeLocationTypesRes.data);
+        const employeesRes = await api.getEmployees();
+        setEmployees(employeesRes.data);
+
+        const salesTransactionsRes = await api.getSalesTransactions();
+        setSalesTransactions(salesTransactionsRes.data);
+
+        const ordersRes = await api.getOrders();
+        setOrders(ordersRes.data);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -108,19 +128,117 @@ const HomePage = () => {
             </Card>
           </Link>
         </Col>
-        
-        
         <Col md={4}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Inventory</Card.Title>
-              <ul>
-                {inventory.map(item => (
-                  <li key={item.id}>{item.quantity}</li>
-                ))}
-              </ul>
-            </Card.Body>
-          </Card>
+          <Link to="/storetypes" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Store Types</Card.Title>
+                <ul>
+                  {storeTypes.map(storeType => (
+                    <li key={storeType.id}>{storeType.name}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/suppliers" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Suppliers</Card.Title>
+                <ul>
+                  {suppliers.map(supplier => (
+                    <li key={supplier.id}>{supplier.name}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/roles" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Roles</Card.Title>
+                <ul>
+                  {roles.map(role => (
+                    <li key={role.id}>{role.name}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/employees" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Employees</Card.Title>
+                <ul>
+                  {employees.map(employee => (
+                    <li key={employee.id}>{employee.name}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/storagetypes" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Storage Types</Card.Title>
+                <ul>
+                  {storageTypes.map(storageType => (
+                    <li key={storageType.id}>{storageType.name}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/inventory" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Inventory</Card.Title>
+                <ul>
+                  {inventory.map(item => (
+                    <li key={item.id}>{item.quantity_available}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/salestransactions" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Sales Transactions</Card.Title>
+                <ul>
+                  {salesTransactions.map(transaction => (
+                    <li key={transaction.id}>{new Date(transaction.date_time).toLocaleDateString()} - {transaction.quantity_sold}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col md={4}>
+          <Link to="/orders" style={{ textDecoration: 'none' }}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Orders</Card.Title>
+                <ul>
+                  {orders.map(order => (
+                    <li key={order.id}>{order.quantity_ordered} - {order.status}</li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </Link>
         </Col>
         <Col md={4}>
           <Link to="/storelocations" style={{ textDecoration: 'none' }}>

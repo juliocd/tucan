@@ -11,6 +11,14 @@ import CategoryPage from './pages/CategoryPage';
 import SubcategoryPage from './pages/SubcategoryPage';
 import StoreLocationPage from './pages/StoreLocationPage';
 import UnitPage from './pages/UnitPage';
+import StoreTypePage from './pages/StoreTypePage';
+import SupplierPage from './pages/SupplierPage';
+import RolePage from './pages/RolePage';
+import StorageTypePage from './pages/StorageTypePage';
+import InventoryPage from './pages/InventoryPage';
+import EmployeePage from './pages/EmployeePage';
+import SalesTransactionPage from './pages/SalesTransactionPage';
+import OrderPage from './pages/OrderPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -39,10 +47,30 @@ function App() {
         <Route path="/units" element={<PrivateRoute />}>
           <Route path="/units" element={<UnitPage />} />
         </Route>
-        {/* <Route path="/storagetypes" element={<PrivateRoute />}>
+        <Route path="/storetypes" element={<PrivateRoute />}>
+          <Route path="/storetypes" element={<StoreTypePage />} />
+        </Route>
+        <Route path="/suppliers" element={<PrivateRoute />}>
+          <Route path="/suppliers" element={<SupplierPage />} />
+        </Route>
+        <Route path="/roles" element={<PrivateRoute />}>
+          <Route path="/roles" element={<RolePage />} />
+        </Route>
+        <Route path="/storagetypes" element={<PrivateRoute />}>
           <Route path="/storagetypes" element={<StorageTypePage />} />
-        </Route> */}
-        
+        </Route>
+        <Route path="/inventory" element={<PrivateRoute />}>
+          <Route path="/inventory" element={<InventoryPage />} />
+        </Route>
+        <Route path="/employees" element={<PrivateRoute />}>
+          <Route path="/employees" element={<EmployeePage />} />
+        </Route>
+        <Route path="/salestransactions" element={<PrivateRoute />}>
+          <Route path="/salestransactions" element={<SalesTransactionPage />} />
+        </Route>
+        <Route path="/orders" element={<PrivateRoute />}>
+          <Route path="/orders" element={<OrderPage />} />
+        </Route>
       </Routes>
     </Router>
   );

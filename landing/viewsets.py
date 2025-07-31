@@ -2,14 +2,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import (
     Category, Subcategory, Unit, Supplier,
-    StoreLocation, Product, Inventory, ProductStoreLocation, Roles, Employee,
-    SalesTransaction, Order
+    StoreLocation, Product, Inventory, Roles, Employee,
+    SalesTransaction, Order, StoreType, StorageType
 )
 from .serializers import (
     CategorySerializer, SubcategorySerializer, UnitSerializer, SupplierSerializer,
     StoreLocationSerializer,
-    ProductSerializer, InventorySerializer, ProductStoreLocationSerializer,
-    RolesSerializer, EmployeeSerializer, SalesTransactionSerializer, OrderSerializer
+    ProductSerializer, InventorySerializer,
+    RolesSerializer, EmployeeSerializer, SalesTransactionSerializer, OrderSerializer, StoreTypeSerializer, StorageTypeSerializer
 )
 
 class BaseViewSet(viewsets.ModelViewSet):
@@ -40,6 +40,14 @@ class UnitViewSet(BaseViewSet):
     queryset = Unit.objects.all()
     serializer_class = UnitSerializer
 
+class StoreTypeViewSet(BaseViewSet):
+    queryset = StoreType.objects.all()
+    serializer_class = StoreTypeSerializer
+
+class StorageTypeViewSet(BaseViewSet):
+    queryset = StorageType.objects.all()
+    serializer_class = StorageTypeSerializer
+
 class SupplierViewSet(BaseViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
@@ -55,10 +63,6 @@ class ProductViewSet(BaseViewSet):
 class InventoryViewSet(BaseViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
-
-class ProductStoreLocationViewSet(BaseViewSet):
-    queryset = ProductStoreLocation.objects.all()
-    serializer_class = ProductStoreLocationSerializer
 
 class RolesViewSet(BaseViewSet):
     queryset = Roles.objects.all()
