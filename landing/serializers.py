@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import (
-    Category, Subcategory, Unit, StorageType, StoreLocationType, Supplier,
+    Category, Subcategory, Unit, Supplier,
     StoreLocation, Product, Inventory, ProductStoreLocation, Roles, Employee,
     SalesTransaction, Order
 )
@@ -31,18 +31,6 @@ class SubcategorySerializer(serializers.ModelSerializer):
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unit
-        fields = '__all__'
-        read_only_fields = ('account_id',)
-
-class StorageTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = StorageType
-        fields = '__all__'
-        read_only_fields = ('account_id',)
-
-class StoreLocationTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = StoreLocationType
         fields = '__all__'
         read_only_fields = ('account_id',)
 

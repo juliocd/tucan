@@ -109,20 +109,7 @@ const HomePage = () => {
           </Link>
         </Col>
         
-        <Col md={4}>
-          <Link to="/storelocationtypes" style={{ textDecoration: 'none' }}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Store Location Types</Card.Title>
-                <ul>
-                  {storeLocationTypes.map(storeLocationType => (
-                    <li key={storeLocationType.id}>{storeLocationType.name}</li>
-                  ))}
-                </ul>
-              </Card.Body>
-            </Card>
-          </Link>
-        </Col>
+        
         <Col md={4}>
           <Card>
             <Card.Body>

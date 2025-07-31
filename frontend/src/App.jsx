@@ -11,8 +11,6 @@ import CategoryPage from './pages/CategoryPage';
 import SubcategoryPage from './pages/SubcategoryPage';
 import StoreLocationPage from './pages/StoreLocationPage';
 import UnitPage from './pages/UnitPage';
-// import StorageTypePage from './pages/StorageTypePage';
-import StoreLocationTypePage from './pages/StoreLocationTypePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -44,9 +42,7 @@ function App() {
         {/* <Route path="/storagetypes" element={<PrivateRoute />}>
           <Route path="/storagetypes" element={<StorageTypePage />} />
         </Route> */}
-        <Route path="/storelocationtypes" element={<PrivateRoute />}>
-          <Route path="/storelocationtypes" element={<StoreLocationTypePage />} />
-        </Route>
+        
       </Routes>
     </Router>
   );

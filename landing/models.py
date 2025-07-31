@@ -28,17 +28,9 @@ class Unit(BaseModel):
     def __str__(self):
         return self.name
 
-class StorageType(BaseModel):
-    name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
 
-class StoreLocationType(BaseModel):
-    name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
 
 class Supplier(BaseModel):
     name = models.CharField(max_length=255)

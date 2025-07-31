@@ -87,18 +87,7 @@ export default {
   deleteStorageType(id) {
     return apiClient.delete(`/storagetypes/${id}/`);
   },
-  getStoreLocationTypes() {
-    return apiClient.get('/storelocationtypes/');
-  },
-  createStoreLocationType(data) {
-    return apiClient.post('/storelocationtypes/', data);
-  },
-  updateStoreLocationType(id, data) {
-    return apiClient.put(`/storelocationtypes/${id}/`, data);
-  },
-  deleteStoreLocationType(id) {
-    return apiClient.delete(`/storelocationtypes/${id}/`);
-  },
+  
   // Add other API calls here
   getInventory() {
     return apiClient.get('/inventory/');

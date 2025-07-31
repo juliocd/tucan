@@ -7,8 +7,8 @@ router = DefaultRouter()
 router.register(r'categories', viewsets.CategoryViewSet)
 router.register(r'subcategories', viewsets.SubcategoryViewSet)
 router.register(r'units', viewsets.UnitViewSet)
-router.register(r'storagetypes', viewsets.StorageTypeViewSet)
-router.register(r'storelocationtypes', viewsets.StoreLocationTypeViewSet)
+
+
 router.register(r'suppliers', viewsets.SupplierViewSet)
 router.register(r'storelocations', viewsets.StoreLocationViewSet)
 router.register(r'products', viewsets.ProductViewSet)
