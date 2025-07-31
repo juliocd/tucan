@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Alert, Modal } from 'react-bootstrap';
 import api from '../api';
-import RoleForm from '../components/RoleForm';
-import RoleDetails from '../components/RoleDetails';
+import EmployeeRoleForm from '../components/EmployeeRoleForm';
+import EmployeeRoleDetails from '../components/EmployeeRoleDetails';
 
-const RolePage = () => {
+const EmployeeRolePage = () => {
   const [roles, setRoles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
@@ -14,12 +14,12 @@ const RolePage = () => {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   useEffect(() => {
-    fetchRoles();
+    fetchEmployeeRoles();
   }, []);
 
-  const fetchRoles = async () => {
+  const fetchEmployeeRoles = async () => {
     try {
-      const response = await api.getRoles();
+      const response = await api.getEmployeeRoles();
       setRoles(response.data);
     } catch (err) {
       setError('Failed to fetch roles.');
@@ -29,11 +29,11 @@ const RolePage = () => {
   const handleSave = async (roleData) => {
     try {
       if (roleData.id) {
-        await api.updateRole(roleData.id, roleData);
+        await api.updateEmployeeRole(roleData.id, roleData);
       } else {
-        await api.createRole(roleData);
+        await api.createEmployeeRole(roleData);
       }
-      fetchRoles();
+      fetchEmployeeRoles();
       setShowModal(false);
     } catch (err) {
       setError('Failed to save role.');
@@ -42,8 +42,8 @@ const RolePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.deleteRole(id);
-      fetchRoles();
+      await api.deleteEmployeeRole(id);
+      fetchEmployeeRoles();
       setShowConfirmModal(false);
     } catch (err) {
       setError('Failed to delete role.');
@@ -67,10 +67,10 @@ const RolePage = () => {
 
   return (
     <Container className="mt-5">
-      <h2>Roles</h2>
+      <h2>Employee Roles</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Button variant="primary" onClick={openCreateModal}>
-        Create Role
+        Create Employee Role
       </Button>
       <Table striped bordered hover className="mt-3">
         <thead>
@@ -92,13 +92,13 @@ const RolePage = () => {
           ))}
         </tbody>
       </Table>
-      <RoleForm
+      <EmployeeRoleForm
         show={showModal}
         handleClose={() => setShowModal(false)}
-        role={selectedRole}
+        role={selectedRole}s
         onSave={handleSave}
       />
-      <RoleDetails
+      <EmployeeRoleDetails
         show={showDetailsModal}
         handleClose={() => setShowDetailsModal(false)}
         role={selectedRole}
@@ -121,4 +121,4 @@ const RolePage = () => {
   );
 };
 
-export default RolePage;
+export default EmployeeRolePage;

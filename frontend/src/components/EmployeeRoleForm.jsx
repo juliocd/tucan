@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
-const RoleForm = ({ show, handleClose, role, onSave }) => {
+const EmployeeRoleForm = ({ show, handleClose, role, onSave }) => {
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const RoleForm = ({ show, handleClose, role, onSave }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{role ? 'Edit Role' : 'Create Role'}</Modal.Title>
+        <Modal.Title>{role ? 'Edit Employee Role' : 'Create Employee Role'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -44,4 +44,4 @@ const RoleForm = ({ show, handleClose, role, onSave }) => {
   );
 };
 
-export default RoleForm;
+export default EmployeeRoleForm;

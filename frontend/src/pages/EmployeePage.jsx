@@ -6,7 +6,7 @@ import EmployeeDetails from '../components/EmployeeDetails';
 
 const EmployeePage = () => {
   const [employees, setEmployees] = useState([]);
-  const [roles, setRoles] = useState([]);
+  const [employeeRoles, setEmployeeRoles] = useState([]);
   const [storeLocations, setStoreLocations] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -32,10 +32,10 @@ const EmployeePage = () => {
 
   const fetchRoles = async () => {
     try {
-      const response = await api.getRoles();
-      setRoles(response.data);
+      const response = await api.getEmployeeRoles();
+      setEmployeeRoles(response.data);
     } catch (err) {
-      console.error('Failed to fetch roles', err);
+      console.error('Failed to fetch employee roles', err);
     }
   };
 
@@ -49,8 +49,8 @@ const EmployeePage = () => {
   };
 
   const getRoleName = (roleId) => {
-    const role = roles.find(r => r.id === roleId);
-    return role ? role.name : 'Unknown';
+    const employeeRole = employeeRoles.find(r => r.id === roleId);
+    return employeeRole ? employeeRole.name : 'Unknown';
   };
 
   const getStoreLocationName = (locationId) => {

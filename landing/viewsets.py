@@ -2,14 +2,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import (
     Category, Subcategory, Unit, Supplier,
-    StoreLocation, Product, Inventory, Roles, Employee,
-    SalesTransaction, Order, StoreType, StorageType
+    StoreLocation, Product, Inventory, Employee,
+    SalesTransaction, Order, StoreType, StorageType, EmployeeRole
 )
 from .serializers import (
     CategorySerializer, SubcategorySerializer, UnitSerializer, SupplierSerializer,
     StoreLocationSerializer,
     ProductSerializer, InventorySerializer,
-    RolesSerializer, EmployeeSerializer, SalesTransactionSerializer, OrderSerializer, StoreTypeSerializer, StorageTypeSerializer
+    EmployeeRoleSerializer, EmployeeSerializer, SalesTransactionSerializer, OrderSerializer, StoreTypeSerializer, StorageTypeSerializer
 )
 
 class BaseViewSet(viewsets.ModelViewSet):
@@ -64,9 +64,9 @@ class InventoryViewSet(BaseViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
 
-class RolesViewSet(BaseViewSet):
-    queryset = Roles.objects.all()
-    serializer_class = RolesSerializer
+class EmployeeRoleViewSet(BaseViewSet):
+    queryset = EmployeeRole.objects.all()
+    serializer_class = EmployeeRoleSerializer
 
 class EmployeeViewSet(BaseViewSet):
     queryset = Employee.objects.all()

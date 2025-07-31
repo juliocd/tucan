@@ -4,7 +4,7 @@ import api from '../api';
 
 const EmployeeForm = ({ show, handleClose, employee, onSave }) => {
   const [formData, setFormData] = useState({});
-  const [roles, setRoles] = useState([]);
+  const [employeeRoles, setEmployeeRoles] = useState([]);
   const [storeLocations, setStoreLocations] = useState([]);
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const EmployeeForm = ({ show, handleClose, employee, onSave }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const rolesRes = await api.getRoles();
-        setRoles(rolesRes.data);
+        const rolesRes = await api.getEmployeeRoles();
+        setEmployeeRoles(rolesRes.data);
 
         const storeLocationsRes = await api.getStoreLocations();
         setStoreLocations(storeLocationsRes.data);
@@ -63,9 +63,9 @@ const EmployeeForm = ({ show, handleClose, employee, onSave }) => {
               onChange={handleChange}
             >
               <option value="">Select a Role</option>
-              {roles.map(role => (
-                <option key={role.id} value={role.id}>
-                  {role.name}
+              {employeeRoles.map(employeeRole => (
+                <option key={employeeRole.id} value={employeeRole.id}>
+                  {employeeRole.name}
                 </option>
               ))}
             </Form.Select>

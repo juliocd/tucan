@@ -13,7 +13,7 @@ import StoreLocationPage from './pages/StoreLocationPage';
 import UnitPage from './pages/UnitPage';
 import StoreTypePage from './pages/StoreTypePage';
 import SupplierPage from './pages/SupplierPage';
-import RolePage from './pages/RolePage';
+import EmployeeRolePage from './pages/EmployeeRolePage';
 import StorageTypePage from './pages/StorageTypePage';
 import InventoryPage from './pages/InventoryPage';
 import EmployeePage from './pages/EmployeePage';
@@ -53,8 +53,8 @@ function App() {
         <Route path="/suppliers" element={<PrivateRoute />}>
           <Route path="/suppliers" element={<SupplierPage />} />
         </Route>
-        <Route path="/roles" element={<PrivateRoute />}>
-          <Route path="/roles" element={<RolePage />} />
+        <Route path="/employeeroles" element={<PrivateRoute />}>
+          <Route path="/employeeroles" element={<EmployeeRolePage />} />
         </Route>
         <Route path="/storagetypes" element={<PrivateRoute />}>
           <Route path="/storagetypes" element={<StorageTypePage />} />

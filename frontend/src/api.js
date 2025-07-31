@@ -99,17 +99,17 @@ export default {
   deleteSupplier(id) {
     return apiClient.delete(`/suppliers/${id}/`);
   },
-  getRoles() {
-    return apiClient.get('/roles/');
+  getEmployeeRoles() {
+    return apiClient.get('/employeeroles/');
   },
-  createRole(data) {
-    return apiClient.post('/roles/', data);
+  createEmployeeRole(data) {
+    return apiClient.post('/employeeroles/', data);
   },
-  updateRole(id, data) {
-    return apiClient.put(`/roles/${id}/`, data);
+  updateEmployeeRole(id, data) {
+    return apiClient.put(`/employeeroles/${id}/`, data);
   },
-  deleteRole(id) {
-    return apiClient.delete(`/roles/${id}/`);
+  deleteEmployeeRole(id) {
+    return apiClient.delete(`/employeeroles/${id}/`);
   },
   getStorageTypes() {
     return apiClient.get('/storagetypes/');

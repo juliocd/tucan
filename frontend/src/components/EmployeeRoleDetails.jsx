@@ -1,13 +1,13 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const RoleDetails = ({ show, handleClose, role }) => {
+const EmployeeRoleDetails = ({ show, handleClose, role }) => {
   if (!role) return null;
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Role Details</Modal.Title>
+        <Modal.Title>Employee Role Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p><strong>ID:</strong> {role.id}</p>
@@ -23,4 +23,4 @@ const RoleDetails = ({ show, handleClose, role }) => {
   );
 };
 
-export default RoleDetails;
+export default EmployeeRoleDetails;

@@ -3,16 +3,16 @@ import { Modal, Button } from 'react-bootstrap';
 import api from '../api';
 
 const EmployeeDetails = ({ show, handleClose, employee }) => {
-  const [roleName, setRoleName] = useState('');
+  const [employeeRoleName, setEmployeeRoleName] = useState('');
   const [storeLocationName, setStoreLocationName] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       if (employee) {
         try {
-          const rolesRes = await api.getRoles();
-          const role = rolesRes.data.find(r => r.id === employee.role_id);
-          if (role) setRoleName(role.name);
+          const rolesRes = await api.getEmployeeRoles();
+          const employeeRole = rolesRes.data.find(r => r.id === employee.role_id);
+          if (employeeRole) setEmployeeRoleName(employeeRole.name);
 
           const storeLocationsRes = await api.getStoreLocations();
           const storeLocation = storeLocationsRes.data.find(sl => sl.id === employee.store_location_id);
@@ -39,7 +39,7 @@ const EmployeeDetails = ({ show, handleClose, employee }) => {
       <Modal.Body>
         <p><strong>ID:</strong> {employee.id}</p>
         <p><strong>Name:</strong> {employee.name}</p>
-        <p><strong>Role:</strong> {roleName}</p>
+        <p><strong>Role:</strong> {employeeRoleName}</p>
         <p><strong>Store Location:</strong> {storeLocationName}</p>
         <p><strong>Account ID:</strong> {employee.account_id}</p>
         <p><strong>Created At:</strong> {new Date(employee.created_at).toLocaleString()}</p>

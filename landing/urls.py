@@ -14,7 +14,7 @@ router.register(r'storelocations', viewsets.StoreLocationViewSet)
 router.register(r'products', viewsets.ProductViewSet)
 router.register(r'inventory', viewsets.InventoryViewSet)
 
-router.register(r'roles', viewsets.RolesViewSet)
+router.register(r'employeeroles', viewsets.EmployeeRoleViewSet)
 router.register(r'employees', viewsets.EmployeeViewSet)
 router.register(r'salestransactions', viewsets.SalesTransactionViewSet)
 router.register(r'orders', viewsets.OrderViewSet)

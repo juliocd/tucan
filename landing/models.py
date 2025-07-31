@@ -84,11 +84,11 @@ class Inventory(BaseModel):
 
 
 
-class Roles(BaseModel):
+class EmployeeRole(BaseModel):
     name = models.CharField(max_length=255)
 
     class Meta:
-        verbose_name_plural = "Roles"
+        verbose_name_plural = "EmployeeRoles"
 
 class Employee(BaseModel):
     name = models.CharField(max_length=255)

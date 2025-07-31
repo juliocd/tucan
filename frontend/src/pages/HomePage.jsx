@@ -12,7 +12,7 @@ const HomePage = () => {
   const [units, setUnits] = useState([]);
   const [storeTypes, setStoreTypes] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
-  const [roles, setRoles] = useState([]);
+  const [employeeRoles, setEmployeeRoles] = useState([]);
   const [storageTypes, setStorageTypes] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [salesTransactions, setSalesTransactions] = useState([]);
@@ -45,8 +45,8 @@ const HomePage = () => {
         const suppliersRes = await api.getSuppliers();
         setSuppliers(suppliersRes.data);
 
-        const rolesRes = await api.getRoles();
-        setRoles(rolesRes.data);
+        const rolesRes = await api.getEmployeeRoles();
+        setEmployeeRoles(rolesRes.data);
 
         const storageTypesRes = await api.getStorageTypes();
         setStorageTypes(storageTypesRes.data);
@@ -157,13 +157,13 @@ const HomePage = () => {
           </Link>
         </Col>
         <Col md={4}>
-          <Link to="/roles" style={{ textDecoration: 'none' }}>
+          <Link to="/employeeroles" style={{ textDecoration: 'none' }}>
             <Card>
               <Card.Body>
-                <Card.Title>Roles</Card.Title>
+                <Card.Title>Employee Roles</Card.Title>
                 <ul>
-                  {roles.map(role => (
-                    <li key={role.id}>{role.name}</li>
+                  {employeeRoles.map(employeeRole => (
+                    <li key={employeeRole.id}>{employeeRole.name}</li>
                   ))}
                 </ul>
               </Card.Body>
