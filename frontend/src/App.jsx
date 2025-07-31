@@ -20,6 +20,7 @@ import EmployeePage from './pages/EmployeePage';
 import SalesTransactionPage from './pages/SalesTransactionPage';
 import OrderPage from './pages/OrderPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/Common.css';
 
 function App() {
   return (

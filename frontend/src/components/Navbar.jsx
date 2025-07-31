@@ -14,12 +14,12 @@ const NavigationBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to={isAuthenticated ? '/home' : '/login'}>Tucan</Navbar.Brand>
+        <Navbar.Brand className='text-rusty' as={Link} to={isAuthenticated ? '/home' : '/'}>Tucan</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {isAuthenticated ? (
-              <Button variant="outline-primary" onClick={handleLogout}>Logout</Button>
+              <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>

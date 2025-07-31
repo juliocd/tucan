@@ -70,7 +70,7 @@ const HomePage = () => {
 
   return (
     <Container className="mt-5">
-      <h2>Home</h2>
+      <h2 className='text-rusty'>Home</h2>
       <Row>
         <Col md={4}>
           <Link to="/products" style={{ textDecoration: 'none' }}>

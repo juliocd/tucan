@@ -21,8 +21,8 @@ const LoginPage = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <h2>Login</h2>
+    <Container className="mt-5 px-30">
+      <h2 className='text-rusty'>Login</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -34,7 +34,7 @@ const LoginPage = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className='btn-primary-gr w-100' variant="primary" type="submit">
           Login
         </Button>
       </Form>

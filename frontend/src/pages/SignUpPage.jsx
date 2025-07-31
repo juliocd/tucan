@@ -26,7 +26,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 px-30">
       <h2>Sign Up</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       {success && <Alert variant="success">{success}</Alert>}
@@ -40,7 +40,7 @@ const SignUpPage = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className='btn-primary-gr w-100' variant="primary" type="submit">
           Sign Up
         </Button>
       </Form>
