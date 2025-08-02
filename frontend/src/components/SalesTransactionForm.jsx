@@ -133,7 +133,7 @@ const SalesTransactionForm = ({ show, handleClose, salesTransaction, onSave }) =
               ))}
             </Form.Select>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

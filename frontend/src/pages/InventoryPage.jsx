@@ -25,7 +25,7 @@ const InventoryPage = () => {
     try {
       const response = await api.getInventory();
       setInventoryItems(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch inventory items.');
     }
   };
@@ -67,9 +67,9 @@ const InventoryPage = () => {
       }
       fetchInventoryItems();
       setShowModal(false);
-    } catch (err) {
-      console.error('Error saving inventory item:', err);
-      setError(`Failed to save inventory item: ${err.response?.data?.detail || err.message}`);
+    } catch (error) {
+      console.error('Failed to save inventory item:', error);
+      setError(`Failed to save inventory item: ${error.response?.data?.detail || error.message}`);
     }
   };
 
@@ -78,7 +78,7 @@ const InventoryPage = () => {
       await api.deleteInventory(id);
       fetchInventoryItems();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete inventory item.');
     }
   };
@@ -99,12 +99,14 @@ const InventoryPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Inventory</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Inventory</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Add Inventory Item
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Add Inventory Item
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

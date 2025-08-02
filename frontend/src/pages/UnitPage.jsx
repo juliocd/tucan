@@ -21,7 +21,7 @@ const UnitPage = () => {
     try {
       const response = await api.getUnits();
       setUnits(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch units.');
     }
   };
@@ -35,7 +35,7 @@ const UnitPage = () => {
       }
       fetchUnits();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save unit.');
     }
   };
@@ -45,7 +45,7 @@ const UnitPage = () => {
       await api.deleteUnit(id);
       fetchUnits();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete unit.');
     }
   };
@@ -66,12 +66,14 @@ const UnitPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Units</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Units</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Unit
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Unit
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

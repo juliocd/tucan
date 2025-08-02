@@ -21,7 +21,7 @@ const StorageTypePage = () => {
     try {
       const response = await api.getStorageTypes();
       setStorageTypes(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch storage types.');
     }
   };
@@ -35,7 +35,7 @@ const StorageTypePage = () => {
       }
       fetchStorageTypes();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save storage type.');
     }
   };
@@ -45,7 +45,7 @@ const StorageTypePage = () => {
       await api.deleteStorageType(id);
       fetchStorageTypes();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete storage type.');
     }
   };
@@ -66,12 +66,14 @@ const StorageTypePage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Storage Types</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Storage Types</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Storage Type
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Storage Type
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

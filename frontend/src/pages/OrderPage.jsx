@@ -25,7 +25,7 @@ const OrderPage = () => {
     try {
       const response = await api.getOrders();
       setOrders(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch orders.');
     }
   };
@@ -34,8 +34,8 @@ const OrderPage = () => {
     try {
       const response = await api.getProducts();
       setProducts(response.data);
-    } catch (err) {
-      console.error('Failed to fetch products', err);
+    } catch (error) {
+      console.error('Failed to fetch products', error);
     }
   };
 
@@ -43,8 +43,8 @@ const OrderPage = () => {
     try {
       const response = await api.getSuppliers();
       setSuppliers(response.data);
-    } catch (err) {
-      console.error('Failed to fetch suppliers', err);
+    } catch (error) {
+      console.error('Failed to fetch suppliers', error);
     }
   };
 
@@ -67,7 +67,7 @@ const OrderPage = () => {
       }
       fetchOrders();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save order.');
     }
   };
@@ -77,7 +77,7 @@ const OrderPage = () => {
       await api.deleteOrder(id);
       fetchOrders();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete order.');
     }
   };
@@ -98,12 +98,14 @@ const OrderPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Orders</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Orders</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Order
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Order
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

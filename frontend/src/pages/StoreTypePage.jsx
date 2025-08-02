@@ -21,7 +21,7 @@ const StoreTypePage = () => {
     try {
       const response = await api.getStoreTypes();
       setStoreTypes(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch store types.');
     }
   };
@@ -35,7 +35,7 @@ const StoreTypePage = () => {
       }
       fetchStoreTypes();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save store type.');
     }
   };
@@ -45,7 +45,7 @@ const StoreTypePage = () => {
       await api.deleteStoreType(id);
       fetchStoreTypes();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete store type.');
     }
   };
@@ -66,12 +66,14 @@ const StoreTypePage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Store Types</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Store Types</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Store Type
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Store Type
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

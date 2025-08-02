@@ -20,7 +20,7 @@ const SignUpPage = () => {
       const response = await api.login({ username, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
-    } catch (err) {
+    } catch (error) {
       setError('Failed to create account. Please try again.');
     }
   };

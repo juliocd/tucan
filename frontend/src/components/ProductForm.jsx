@@ -204,7 +204,7 @@ const ProductForm = ({ show, handleClose, product, onSave }) => {
             <Form.Label>Reorder Threshold</Form.Label>
             <Form.Control type="number" name="reorder_threshold" value={formData.reorder_threshold || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

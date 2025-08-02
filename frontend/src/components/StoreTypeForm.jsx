@@ -35,7 +35,7 @@ const StoreTypeForm = ({ show, handleClose, storeType, onSave }) => {
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" name="name" value={formData.name || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

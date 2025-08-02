@@ -74,7 +74,7 @@ const StoreLocationForm = ({ show, handleClose, storeLocation, onSave }) => {
             <Form.Label>Contact Info</Form.Label>
             <Form.Control type="text" name="contact_info" value={formData.contact_info || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

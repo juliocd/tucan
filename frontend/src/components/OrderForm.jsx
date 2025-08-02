@@ -122,7 +122,7 @@ const OrderForm = ({ show, handleClose, order, onSave }) => {
             <Form.Label>Status</Form.Label>
             <Form.Control type="text" name="status" value={formData.status || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

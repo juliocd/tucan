@@ -21,7 +21,7 @@ const StoreLocationPage = () => {
     try {
       const response = await api.getStoreLocations();
       setStoreLocations(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch store locations.');
     }
   };
@@ -35,7 +35,7 @@ const StoreLocationPage = () => {
       }
       fetchStoreLocations();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save store location.');
     }
   };
@@ -45,7 +45,7 @@ const StoreLocationPage = () => {
       await api.deleteStoreLocation(id);
       fetchStoreLocations();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete store location.');
     }
   };
@@ -66,12 +66,14 @@ const StoreLocationPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Store Locations</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Store Locations</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Store Location
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Store Location
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

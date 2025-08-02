@@ -1,0 +1,7 @@
+.nav-item:hover {
+    background-color: #7f8970;
+}
+
+.nav-item-custom:active {
+    background-color: #9cc659;
+}

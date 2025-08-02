@@ -25,7 +25,7 @@ const EmployeePage = () => {
     try {
       const response = await api.getEmployees();
       setEmployees(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch employees.');
     }
   };
@@ -34,8 +34,8 @@ const EmployeePage = () => {
     try {
       const response = await api.getEmployeeRoles();
       setEmployeeRoles(response.data);
-    } catch (err) {
-      console.error('Failed to fetch employee roles', err);
+    } catch (error) {
+      console.error('Failed to fetch employee roles', error);
     }
   };
 
@@ -43,8 +43,8 @@ const EmployeePage = () => {
     try {
       const response = await api.getStoreLocations();
       setStoreLocations(response.data);
-    } catch (err) {
-      console.error('Failed to fetch store locations', err);
+    } catch (error) {
+      console.error('Failed to fetch store locations', error);
     }
   };
 
@@ -67,7 +67,7 @@ const EmployeePage = () => {
       }
       fetchEmployees();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save employee.');
     }
   };
@@ -77,7 +77,7 @@ const EmployeePage = () => {
       await api.deleteEmployee(id);
       fetchEmployees();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete employee.');
     }
   };
@@ -98,12 +98,14 @@ const EmployeePage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Employees</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Employees</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Employee
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Employee
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

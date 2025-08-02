@@ -23,7 +23,7 @@ const SubcategoryPage = () => {
     try {
       const response = await api.getSubcategories();
       setSubcategories(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch subcategories.');
     }
   };
@@ -32,7 +32,7 @@ const SubcategoryPage = () => {
     try {
       const response = await api.getCategories();
       setCategories(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch categories.');
     }
   };
@@ -51,7 +51,7 @@ const SubcategoryPage = () => {
       }
       fetchSubcategories();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save subcategory.');
     }
   };
@@ -61,7 +61,7 @@ const SubcategoryPage = () => {
       await api.deleteSubcategory(id);
       fetchSubcategories();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete subcategory.');
     }
   };
@@ -82,12 +82,14 @@ const SubcategoryPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Subcategories</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Subcategories</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Subcategory
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Subcategory
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

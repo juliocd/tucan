@@ -21,7 +21,7 @@ const ProductPage = () => {
     try {
       const response = await api.getProducts();
       setProducts(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch products.');
     }
   };
@@ -35,7 +35,7 @@ const ProductPage = () => {
       }
       fetchProducts();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save product.');
     }
   };
@@ -45,7 +45,7 @@ const ProductPage = () => {
       await api.deleteProduct(id);
       fetchProducts();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete product.');
     }
   };
@@ -66,12 +66,14 @@ const ProductPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Products</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Products</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Product
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Product
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

@@ -43,7 +43,7 @@ const SupplierForm = ({ show, handleClose, supplier, onSave }) => {
             <Form.Label>Lead Time (days)</Form.Label>
             <Form.Control type="number" name="lead_time" value={formData.lead_time || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>

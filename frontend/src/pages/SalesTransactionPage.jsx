@@ -27,7 +27,7 @@ const SalesTransactionPage = () => {
     try {
       const response = await api.getSalesTransactions();
       setSalesTransactions(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch sales transactions.');
     }
   };
@@ -36,8 +36,8 @@ const SalesTransactionPage = () => {
     try {
       const response = await api.getProducts();
       setProducts(response.data);
-    } catch (err) {
-      console.error('Failed to fetch products', err);
+    } catch (error) {
+      console.error('Failed to fetch products', error);
     }
   };
 
@@ -45,8 +45,8 @@ const SalesTransactionPage = () => {
     try {
       const response = await api.getStoreLocations();
       setStoreLocations(response.data);
-    } catch (err) {
-      console.error('Failed to fetch store locations', err);
+    } catch (error) {
+      console.error('Failed to fetch store locations', error);
     }
   };
 
@@ -54,24 +54,14 @@ const SalesTransactionPage = () => {
     try {
       const response = await api.getEmployees();
       setEmployees(response.data);
-    } catch (err) {
-      console.error('Failed to fetch employees', err);
+    } catch (error) {
+      console.error('Failed to fetch employees', error);
     }
   };
 
   const getProductName = (productId) => {
     const product = products.find(p => p.id === productId);
     return product ? product.name : 'Unknown';
-  };
-
-  const getStoreLocationName = (locationId) => {
-    const location = storeLocations.find(l => l.id === locationId);
-    return location ? location.store_name : 'Unknown';
-  };
-
-  const getEmployeeName = (employeeId) => {
-    const employee = employees.find(e => e.id === employeeId);
-    return employee ? employee.name : 'Unknown';
   };
 
   const handleSave = async (salesTransactionData) => {
@@ -83,7 +73,7 @@ const SalesTransactionPage = () => {
       }
       fetchSalesTransactions();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save sales transaction.');
     }
   };
@@ -93,7 +83,7 @@ const SalesTransactionPage = () => {
       await api.deleteSalesTransaction(id);
       fetchSalesTransactions();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete sales transaction.');
     }
   };
@@ -114,12 +104,14 @@ const SalesTransactionPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Sales Transactions</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Sales Transactions</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Sales Transaction
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Sales Transaction
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

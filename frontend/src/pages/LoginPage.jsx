@@ -15,7 +15,7 @@ const LoginPage = () => {
       const response = await api.login({ username, password });
       localStorage.setItem('token', response.data.token);
       navigate('/home');
-    } catch (err) {
+    } catch (error) {
       setError('Invalid credentials. Please try again.');
     }
   };

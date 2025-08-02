@@ -21,7 +21,7 @@ const EmployeeRolePage = () => {
     try {
       const response = await api.getEmployeeRoles();
       setRoles(response.data);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch roles.');
     }
   };
@@ -35,7 +35,7 @@ const EmployeeRolePage = () => {
       }
       fetchEmployeeRoles();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save role.');
     }
   };
@@ -45,7 +45,7 @@ const EmployeeRolePage = () => {
       await api.deleteEmployeeRole(id);
       fetchEmployeeRoles();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete role.');
     }
   };
@@ -66,12 +66,14 @@ const EmployeeRolePage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Employee Roles</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Employee Roles</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Employee Role
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Employee Role
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

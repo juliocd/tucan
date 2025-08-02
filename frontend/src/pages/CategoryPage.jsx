@@ -21,7 +21,7 @@ const CategoryPage = () => {
     try {
       const response = await api.getCategories();
       setCategories(response.data);
-    } catch (err) {
+    } catch (_error) {
       setError('Failed to fetch categories.');
     }
   };
@@ -35,7 +35,7 @@ const CategoryPage = () => {
       }
       fetchCategories();
       setShowModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to save category.');
     }
   };
@@ -45,7 +45,7 @@ const CategoryPage = () => {
       await api.deleteCategory(id);
       fetchCategories();
       setShowConfirmModal(false);
-    } catch (err) {
+    } catch (error) {
       setError('Failed to delete category.');
     }
   };
@@ -66,12 +66,14 @@ const CategoryPage = () => {
   }
 
   return (
-    <Container className="mt-5">
-      <h2>Categories</h2>
+    <Container className="mt-2">
+      <h2 className='text-rusty'>Categories</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Button variant="primary" onClick={openCreateModal}>
-        Create Category
-      </Button>
+      <div class="d-flex justify-content-end w-100">
+        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+          Create Category
+        </Button>
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

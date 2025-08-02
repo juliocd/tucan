@@ -162,18 +162,6 @@ export default {
   deleteOrder(id) {
     return apiClient.delete(`/orders/${id}/`);
   },
-  getStorageTypes() {
-    return apiClient.get('/storagetypes/');
-  },
-  createStorageType(data) {
-    return apiClient.post('/storagetypes/', data);
-  },
-  updateStorageType(id, data) {
-    return apiClient.put(`/storagetypes/${id}/`, data);
-  },
-  deleteStorageType(id) {
-    return apiClient.delete(`/storagetypes/${id}/`);
-  },
   
   // Add other API calls here
   getInventory() {
@@ -184,9 +172,6 @@ export default {
   },
   updateInventory(id, data) {
     return apiClient.put(`/inventory/${id}/`, data);
-  },
-  getStoreLocations() {
-    return apiClient.get('/storelocations/');
   },
   login(data) {
     return apiClient.post('/login/', data);

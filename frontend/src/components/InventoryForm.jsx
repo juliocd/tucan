@@ -132,7 +132,7 @@ const InventoryForm = ({ show, handleClose, inventory, onSave }) => {
             <Form.Label>Batch Number</Form.Label>
             <Form.Control type="text" name="batch_number" value={formData.batch_number || ''} onChange={handleChange} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='btn-primary-gr' variant="primary" type="submit">
             Save
           </Button>
         </Form>
