@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Alert, Modal } from 'react-bootstrap';
+import { Container, Table, Button, Alert, Modal, Form, Row, Col, Pagination } from 'react-bootstrap';
 import api from '../api';
 import ProductForm from '../components/ProductForm';
 import ProductDetails from '../components/ProductDetails';
@@ -12,15 +12,28 @@ const ProductPage = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [sortBy, setSortBy] = useState('name');
+  const [sortDir, setSortDir] = useState('asc');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [currentPage, pageSize, sortBy, sortDir, searchTerm]);
 
   const fetchProducts = async () => {
     try {
-      const response = await api.getProducts();
-      setProducts(response.data);
+      const response = await api.getProducts({ 
+        page: currentPage, 
+        page_size: pageSize, 
+        ordering: `${sortDir === 'desc' ? '-' : ''}${sortBy}`,
+        search: searchTerm
+      });
+      console.log(response.data);
+      setProducts(response.data || []);
+      setTotalPages(Math.ceil((response.data.length || 0) / pageSize));
     } catch (error) {
       setError('Failed to fetch products.');
     }
@@ -65,20 +78,46 @@ const ProductPage = () => {
     setShowModal(true);
   }
 
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortDir('asc');
+    }
+  };
+
   return (
     <Container className="mt-2">
       <h2 className='text-rusty'>Products</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <div class="d-flex justify-content-end w-100">
-        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
-          Create Product
-        </Button>
-      </div>
+      <Row className="mb-3">
+        <Col>
+          <Form.Control
+            type="text"
+            placeholder="Search by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <Form.Select value={pageSize} onChange={(e) => setPageSize(e.target.value)}>
+            <option value="10">10 per page</option>
+            <option value="25">25 per page</option>
+            <option value="50">50 per page</option>
+          </Form.Select>
+        </Col>
+        <Col className="d-flex justify-content-end">
+          <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+            Create Product
+          </Button>
+        </Col>
+      </Row>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Price</th>
+            <th onClick={() => handleSort('name')}>Name {sortBy === 'name' && (sortDir === 'asc' ? '▲' : '▼')}</th>
+            <th onClick={() => handleSort('price')}>Price {sortBy === 'price' && (sortDir === 'asc' ? '▲' : '▼')}</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -96,6 +135,19 @@ const ProductPage = () => {
           ))}
         </tbody>
       </Table>
+      {totalPages > 0 && (
+        <Pagination>
+          <Pagination.First onClick={() => setCurrentPage(1)} disabled={currentPage === 1} />
+          <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+          {[...Array(totalPages).keys()].map(page => (
+            <Pagination.Item key={page + 1} active={page + 1 === currentPage} onClick={() => setCurrentPage(page + 1)}>
+              {page + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => setCurrentPage(currentPage + 2)} disabled={currentPage === totalPages} />
+          <Pagination.Last onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages} />
+        </Pagination>
+      )}
       <ProductForm
         show={showModal}
         handleClose={() => setShowModal(false)}

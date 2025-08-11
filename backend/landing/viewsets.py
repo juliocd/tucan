@@ -1,5 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import (
     Category, Subcategory, Unit, Supplier,
     StoreLocation, Product, Inventory, Employee,
@@ -16,6 +17,8 @@ class BaseViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        print("Query Params:", self.request.query_params)
+        print("GET Params:", self.request.GET)
         """
         This view should return a list of all the objects
         for the currently authenticated user.
@@ -59,6 +62,8 @@ class StoreLocationViewSet(BaseViewSet):
 class ProductViewSet(BaseViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
 
 class InventoryViewSet(BaseViewSet):
     queryset = Inventory.objects.all()

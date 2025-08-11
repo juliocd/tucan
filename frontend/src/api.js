@@ -15,8 +15,8 @@ apiClient.interceptors.request.use((config) => {
 });
 
 export default {
-  getProducts() {
-    return apiClient.get('/products/');
+  getProducts(params) {
+    return apiClient.get('/products/', { params });
   },
   createProduct(data) {
     return apiClient.post('/products/', data);
