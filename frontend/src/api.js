@@ -27,8 +27,8 @@ export default {
   deleteProduct(id) {
     return apiClient.delete(`/products/${id}/`);
   },
-  getCategories() {
-    return apiClient.get('/categories/');
+  getCategories(params) {
+    return apiClient.get('/categories/', { params });
   },
   createCategory(data) {
     return apiClient.post('/categories/', data);

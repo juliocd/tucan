@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Alert, Modal } from 'react-bootstrap';
+import { Container, Table, Button, Alert, Modal, Pagination, Form, Row, Col } from 'react-bootstrap';
 import api from '../api';
 import CategoryForm from '../components/CategoryForm';
 import CategoryDetails from '../components/CategoryDetails';
@@ -12,15 +12,27 @@ const CategoryPage = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('name');
+  const [sortDir, setSortDir] = useState('asc');
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [currentPage, pageSize, searchTerm, sortBy, sortDir]);
 
   const fetchCategories = async () => {
     try {
-      const response = await api.getCategories();
-      setCategories(response.data);
+      const response = await api.getCategories({ 
+        page: currentPage, 
+        page_size: pageSize, 
+        search: searchTerm,
+        ordering: `${sortDir === 'desc' ? '-' : ''}${sortBy}`,
+      });
+      setCategories(response.data.results || []);
+      setTotalPages(Math.ceil((response.data.count || 0) / pageSize));
     } catch (_error) {
       setError('Failed to fetch categories.');
     }
@@ -65,19 +77,38 @@ const CategoryPage = () => {
     setShowModal(true);
   }
 
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortDir('asc');
+    }
+  };
+
   return (
     <Container className="mt-2">
       <h2 className='text-rusty'>Categories</h2>
       {error && <Alert variant="danger">{error}</Alert>}
-      <div class="d-flex justify-content-end w-100">
-        <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
-          Create Category
-        </Button>
-      </div>
+      <Row className="mb-3">
+        <Col>
+          <Form.Control
+            type="text"
+            placeholder="Search by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Col>
+        <Col className="d-flex justify-content-end">
+          <Button className='btn-primary-gr' variant="primary" onClick={openCreateModal}>
+            Create Category
+          </Button>
+        </Col>
+      </Row>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>
-            <th>Name</th>
+            <th onClick={() => handleSort('name')}>Name {sortBy === 'name' && (sortDir === 'asc' ? '▲' : '▼')}</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -94,6 +125,19 @@ const CategoryPage = () => {
           ))}
         </tbody>
       </Table>
+      {totalPages > 0 && (
+        <Pagination>
+          <Pagination.First onClick={() => setCurrentPage(1)} disabled={currentPage === 1} />
+          <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+          {[...Array(totalPages).keys()].map(page => (
+            <Pagination.Item key={page + 1} active={page + 1 === currentPage} onClick={() => setCurrentPage(page + 1)}>
+              {page + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} />
+          <Pagination.Last onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages} />
+        </Pagination>
+      )}
       <CategoryForm
         show={showModal}
         handleClose={() => setShowModal(false)}
