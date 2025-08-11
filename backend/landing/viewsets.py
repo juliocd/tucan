@@ -62,8 +62,9 @@ class StoreLocationViewSet(BaseViewSet):
 class ProductViewSet(BaseViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = ['name']
+    ordering_fields = ['name', 'price']
 
 class InventoryViewSet(BaseViewSet):
     queryset = Inventory.objects.all()
