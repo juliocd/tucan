@@ -31,9 +31,8 @@ const ProductPage = () => {
         ordering: `${sortDir === 'desc' ? '-' : ''}${sortBy}`,
         search: searchTerm
       });
-      console.log(response.data);
-      setProducts(response.data || []);
-      setTotalPages(Math.ceil((response.data.length || 0) / pageSize));
+      setProducts(response.data.results || []);
+      setTotalPages(Math.ceil((response.data.count || 0) / pageSize));
     } catch (error) {
       setError('Failed to fetch products.');
     }
