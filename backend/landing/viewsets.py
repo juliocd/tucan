@@ -41,6 +41,9 @@ class CategoryViewSet(BaseViewSet):
 class SubcategoryViewSet(BaseViewSet):
     queryset = Subcategory.objects.all()
     serializer_class = SubcategorySerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['name']
 
 class UnitViewSet(BaseViewSet):
     queryset = Unit.objects.all()

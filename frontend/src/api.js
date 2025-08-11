@@ -39,8 +39,8 @@ export default {
   deleteCategory(id) {
     return apiClient.delete(`/categories/${id}/`);
   },
-  getSubcategories(categoryId) {
-    return apiClient.get('/subcategories/', { params: { category_id: categoryId } });
+  getSubcategories(params) {
+    return apiClient.get('/subcategories/', { params });
   },
   createSubcategory(data) {
     return apiClient.post('/subcategories/', data);
