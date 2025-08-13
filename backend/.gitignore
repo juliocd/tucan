@@ -1,0 +1,5 @@
+tucan_project/__pycache__/
+tucan_project/*.py[cod]
+tucan_project/*$py.class
+
+landing/__pycache__/
