@@ -31,8 +31,8 @@ const CategoryPage = () => {
         search: searchTerm,
         ordering: `${sortDir === 'desc' ? '-' : ''}${sortBy}`,
       });
-      setCategories(response.data.results || []);
-      setTotalPages(Math.ceil((response.data.count || 0) / pageSize));
+      setCategories(response.data || []);
+      setTotalPages(1); // Since pagination is disabled, there's only one page
     } catch (_error) {
       setError('Failed to fetch categories.');
     }
