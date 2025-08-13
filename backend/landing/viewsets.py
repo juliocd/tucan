@@ -37,6 +37,7 @@ class CategoryViewSet(BaseViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name']
     ordering_fields = ['name']
+    pagination_class = None
 
 class SubcategoryViewSet(BaseViewSet):
     queryset = Subcategory.objects.all()
