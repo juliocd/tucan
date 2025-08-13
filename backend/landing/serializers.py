@@ -22,10 +22,19 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ('account_id',)
 
 class SubcategorySerializer(serializers.ModelSerializer):
+    category_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Subcategory
-        fields = '__all__'
+        fields = ('id', 'name', 'category_id', 'category_name', 'created_at', 'account_id')
         read_only_fields = ('account_id',)
+
+    def get_category_name(self, obj):
+        try:
+            category = Category.objects.get(id=obj.category_id)
+            return category.name
+        except Category.DoesNotExist:
+            return None
 
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:

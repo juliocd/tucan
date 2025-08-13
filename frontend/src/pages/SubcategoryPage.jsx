@@ -6,7 +6,6 @@ import SubcategoryDetails from '../components/SubcategoryDetails';
 
 const SubcategoryPage = () => {
   const [subcategories, setSubcategories] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [error, setError] = useState('');
@@ -21,12 +20,8 @@ const SubcategoryPage = () => {
   const [sortDir, setSortDir] = useState('asc');
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
     fetchSubcategories();
-  }, [currentPage, pageSize, searchTerm, sortBy, sortDir, categories]);
+  }, [currentPage, pageSize, searchTerm, sortBy, sortDir]);
 
   const fetchSubcategories = async () => {
     try {
@@ -41,20 +36,6 @@ const SubcategoryPage = () => {
     } catch (error) {
       setError('Failed to fetch subcategories.');
     }
-  };
-
-  const fetchCategories = async () => {
-    try {
-      const response = await api.getCategories({ page_size: 1000 });
-      setCategories(response.data.results || []);
-    } catch (error) {
-      setError('Failed to fetch categories.');
-    }
-  };
-
-  const getCategoryName = (categoryId) => {
-    const category = categories.find(cat => cat.id === categoryId);
-    return category ? category.name : 'Unknown';
   };
 
   const handleSave = async (subcategoryData) => {
@@ -136,7 +117,7 @@ const SubcategoryPage = () => {
           {subcategories.map(subcategory => (
             <tr key={subcategory.id}>
               <td>{subcategory.name}</td>
-              <td>{getCategoryName(subcategory.category)}</td>
+              <td>{subcategory.category_name}</td>
               <td>
                 <Button variant="secondary" onClick={() => openDetailsModal(subcategory)}>View</Button>
                 <Button variant="info" onClick={() => { setSelectedSubcategory(subcategory); setShowModal(true); }} className="ms-2">Edit</Button>
@@ -164,13 +145,11 @@ const SubcategoryPage = () => {
         handleClose={() => setShowModal(false)}
         subcategory={selectedSubcategory}
         onSave={handleSave}
-        categories={categories}
       />
       <SubcategoryDetails
         show={showDetailsModal}
         handleClose={() => setShowDetailsModal(false)}
         subcategory={selectedSubcategory}
-        categoryName={getCategoryName(selectedSubcategory?.category)}
       />
       <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
         <Modal.Header closeButton>
